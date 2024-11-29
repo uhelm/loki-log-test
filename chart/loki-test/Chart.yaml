@@ -1,0 +1,11 @@
+apiVersion: v2
+name: loki-test
+description: Simple logging test application for CLAB Loki
+type: application
+version: 0.0.1
+appVersion: 0.0.1
+keywords:
+  - loki
+home: https://github.com/kubernetes-sigs/loki-test
+sources:
+  - https://github.com/kubernetes-sigs/loki-test
