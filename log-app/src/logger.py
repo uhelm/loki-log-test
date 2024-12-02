@@ -3,15 +3,23 @@
 import sys
 import logging
 import time
-from cowsay import cowsay
 from random import randint
+
+import cowsay
 
 logger = logging.getLogger('')
 logger.setLevel(logging.NOTSET)
 sh = logging.StreamHandler(sys.stdout)
 eh = logging.StreamHandler(sys.stderr)
-formatter_stdout = logging.Formatter('[%(asctime)s] STDOUT %(levelname)s [%(filename)s.%(funcName)s:%(lineno)d] %(message)s', datefmt='%a, %d %b %Y %H:%M:%S')
-formatter_stderr = logging.Formatter('[%(asctime)s] STDERR %(levelname)s [%(filename)s.%(funcName)s:%(lineno)d] %(message)s', datefmt='%a, %d %b %Y %H:%M:%S')
+formatter_stdout = logging.Formatter( \
+    '[%(asctime)s] STDOUT %(levelname)s \
+    [%(filename)s.%(funcName)s:%(lineno)d] %(message)s', \
+    datefmt='%a, %d %b %Y %H:%M:%S')
+
+formatter_stderr = logging.Formatter(\
+    '[%(asctime)s] STDERR %(levelname)s \
+    [%(filename)s.%(funcName)s:%(lineno)d] %(message)s', \
+    datefmt='%a, %d %b %Y %H:%M:%S')
 sh.setFormatter(formatter_stdout)
 eh.setFormatter(formatter_stderr)
 sh.setLevel(logging.DEBUG)
@@ -20,7 +28,7 @@ logger.addHandler(eh)
 logger.addHandler(sh)
 
 def cow():
-    return cowsay("Moooo...")
+    return cowsay.cow("Moooo...")
 
 def test_logger():
     logger.info("Hello info")
@@ -30,7 +38,7 @@ def test_logger():
     logger.debug("Hello debug")
 
 if __name__ == "__main__":
-    print(cow())
+    cow()
     while True:
         test_logger()
         s = randint(1,30)
