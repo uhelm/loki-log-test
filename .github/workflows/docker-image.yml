@@ -1,5 +1,10 @@
 name: Docker Image CI
 
+env:
+  IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
+  REGISTRY_USER: ${{ github.actor }}
+  REGISTRY_PASSWORD: ${{ github.token }
+
 on:
   push:
     branches: [ "master" ]
