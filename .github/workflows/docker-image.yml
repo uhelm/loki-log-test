@@ -18,6 +18,7 @@ jobs:
       id: build_image
       uses: redhat-actions/buildah-build@v2
       with:
+        context: log-app/
         image: log-app
         tags: latest ${{ github.sha }}
         containerfiles: ./log-app/Dockerfile
