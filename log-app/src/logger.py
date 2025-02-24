@@ -3,15 +3,22 @@
 import sys
 import logging
 import time
+import json
 from random import randint
 from pythonjsonlogger.json import JsonFormatter
 
 import cowsay
 
+class CustomJsonFormatter(logging.Formatter):
+    def format(self, record: logging.LogRecord) -> str:
+        super(CustomJsonFormatter, self).format(record)
+        output = {k: str(v) for k, v in record.__dict__.items()}
+        return json.dumps(output)
+    
 logger = logging.getLogger('')
 logger.setLevel(logging.NOTSET)
 sh = logging.StreamHandler(sys.stdout)
-#eh = logging.StreamHandler(sys.stderr)
+
 formatter_stdout = logging.Formatter( \
     '[%(asctime)s] STDOUT %(levelname)s \
     [%(filename)s.%(funcName)s:%(lineno)d] %(message)s', \
@@ -21,29 +28,26 @@ formatter_stderr = logging.Formatter(\
     '[%(asctime)s] STDERR %(levelname)s \
     [%(filename)s.%(funcName)s:%(lineno)d] %(message)s', \
     datefmt='%a, %d %b %Y %H:%M:%S')
-#sh.setFormatter(formatter_stdout)
-#eh.setFormatter(formatter_stderr)
-sh.setFormatter(JsonFormatter())
+
+cf = CustomJsonFormatter()
+sh.setFormatter(cf)
 sh.setLevel(logging.DEBUG)
-#eh.setLevel(logging.WARNING)
 logger.addHandler(sh)
-#logger.addHandler(eh)
-#logger.addHandler(sh)
 
 def cow():
     return cowsay.cow("Moooo...")
 
 def test_logger():
-    logger.info("Hello", extra={"level": "info"})
-    logger.critical("Hello", extra={"level": "critical"})
-    logger.warning("Hello", extra={"level": "warning"})
-    logger.error("Hello", extra={"level": "error"})
-    logger.debug("Hello", extra={"level": " debug"})
+    logger.info("INFO: This is a log message", extra={"app_custom_level": "info", "request_id": "12ab34cd56ef" })
+    logger.critical("CRITICAL: This is a log message", extra={"app_custom_level": "critical", "request_id": "12ab34cd56ef"})
+    logger.warning("WARNING: This is a log message", extra={"app_custom_level": "warning", "request_id": "12ab34cd56ef"})
+    logger.error("ERROR: This is a log message", extra={"app_custom_level": "error", "request_id": "12ab34cd56ef"})
+    logger.debug("DEBUG: This is a log message", extra={"app_custom_level": " debug", "request_id": "12ab34cd56ef"})
 
 if __name__ == "__main__":
     cow()
     while True:
         test_logger()
-        s = randint(1,30)
+        s = randint(30,120)
         print(f"Sleeping for {s} seconds")
         time.sleep(s)
