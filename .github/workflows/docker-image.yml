@@ -11,6 +11,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+  
     - name: Build Backend
       id: build_image
       uses: redhat-actions/buildah-build@v2
