@@ -38,11 +38,11 @@ def cow():
     return cowsay.cow("Moooo...")
 
 def test_logger():
-    logger.info("INFO: This is a log message", extra={"app_custom_level": "info", "request_id": "12ab34cd56ef" })
-    logger.critical("CRITICAL: This is a log message", extra={"app_custom_level": "critical", "request_id": "12ab34cd56ef"})
-    logger.warning("WARNING: This is a log message", extra={"app_custom_level": "warning", "request_id": "12ab34cd56ef"})
-    logger.error("ERROR: This is a log message", extra={"app_custom_level": "error", "request_id": "12ab34cd56ef"})
-    logger.debug("DEBUG: This is a log message", extra={"app_custom_level": " debug", "request_id": "12ab34cd56ef"})
+    logger.info("This is a log message", extra={"app_custom_level": "info", "request_id": "12ab34cd56ef" })
+    logger.critical("This is a log message", extra={"app_custom_level": "critical", "request_id": "12ab34cd56ef"})
+    logger.warning("This is a log message", extra={"app_custom_level": "warning", "request_id": "12ab34cd56ef"})
+    logger.error("This is a log message", extra={"app_custom_level": "error", "request_id": "12ab34cd56ef"})
+    logger.debug("This is a log message", extra={"app_custom_level": " debug", "request_id": "12ab34cd56ef"})
 
 if __name__ == "__main__":
     cow()
